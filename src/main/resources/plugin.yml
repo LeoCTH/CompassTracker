@@ -1,0 +1,12 @@
+name: CompassTracker
+version: ${project.version}
+main: com.leocth.compasstracker.CompassTracker
+api-version: 1.16
+prefix: CompassTracker
+authors: [leocth]
+description: Tracks players with compasses!
+commands:
+  cbind:
+    description: Binds a compass to point at a player
+    usage: /cbind [player]
+    permission: compasstracker.bind
