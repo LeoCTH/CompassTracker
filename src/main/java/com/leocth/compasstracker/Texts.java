@@ -14,6 +14,7 @@ public final class Texts {
             .append("TRACE LOST")
             .bold(true)
             .append(" - target is offline!")
+            .bold(false)
             .create();
 
     public static final BaseComponent[] TRACE_OTHER_DIM_TEXT
@@ -22,15 +23,26 @@ public final class Texts {
             .append("TRACE INTERRUPTED")
             .bold(true)
             .append(" - target is in another dimension!")
+            .bold(false)
             .create();
 
-    public static BaseComponent[] getTrackingText(Player player) {
+    public static BaseComponent[] getBindingText(Player target) {
+        return new ComponentBuilder()
+                .color(ChatColor.GREEN)
+                .append("Compass bound to track ")
+                .append(target.getDisplayName())
+                .bold(true)
+                .create();
+    }
+
+    public static BaseComponent[] getTrackingText(Player target) {
         return new ComponentBuilder()
                 .color(ChatColor.GREEN)
                 .append("Targeting ")
-                .append(player.getDisplayName())
+                .append(target.getDisplayName())
                 .bold(true)
                 .append("'s last position!")
+                .bold(false)
                 .create();
     }
 }

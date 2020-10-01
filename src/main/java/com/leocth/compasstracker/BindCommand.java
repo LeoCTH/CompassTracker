@@ -57,9 +57,8 @@ public class BindCommand implements CommandExecutor {
             return true;
         }
         pdc.set(CompassTracker.COMPASS_TARGET, PersistentDataType.INTEGER_ARRAY, SerializationUtils.uuid2IntArray(target.getUniqueId()));
-        player.sendMessage("§aCompass bound to track " + target.getDisplayName());
-        meta.setDisplayName("§fCompass §a[TRACKING " + target.getDisplayName() + "]");
-        player.setCompassTarget(target.getLocation());
+        player.spigot().sendMessage(Texts.getBindingText(target));
+        MetaUtils.setLocated(meta, player);
         stack.setItemMeta(meta);
         return true;
     }

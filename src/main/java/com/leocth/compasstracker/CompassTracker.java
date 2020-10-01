@@ -73,7 +73,7 @@ public final class CompassTracker extends JavaPlugin implements Listener {
                         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, Texts.TRACE_OTHER_DIM_TEXT);
                     }
                     else {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, Texts.getTrackingText(player));
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, Texts.getTrackingText(target));
                         player.setCompassTarget(target.getLocation());
                     }
 
