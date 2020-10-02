@@ -3,12 +3,13 @@ package com.leocth.compasstracker;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.TranslatableComponent;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-// TODO this entire thing is a massive todo
 public final class Texts {
 
-    public static final BaseComponent[] TRACE_OFFLINE_TEXT
+    public static final BaseComponent[] TRACE_OFFLINE
             = new ComponentBuilder()
             .color(ChatColor.RED)
             .append("TRACE LOST")
@@ -17,7 +18,16 @@ public final class Texts {
             .bold(false)
             .create();
 
-    public static final BaseComponent[] TRACE_OTHER_DIM_TEXT
+    public static final BaseComponent[] PLAYER_NOT_FOUND
+            = new ComponentBuilder()
+            .color(ChatColor.RED)
+            .append("TRACE LOST")
+            .bold(true)
+            .append(" - target not found in the database! Resetting...")
+            .bold(false)
+            .create();
+
+    public static final BaseComponent[] TRACE_OTHER_DIM
             = new ComponentBuilder()
             .color(ChatColor.LIGHT_PURPLE)
             .append("TRACE INTERRUPTED")
@@ -26,7 +36,30 @@ public final class Texts {
             .bold(false)
             .create();
 
-    public static BaseComponent[] getBindingText(Player target) {
+    public static final BaseComponent[] NOT_A_PLAYER
+            = new ComponentBuilder()
+            .color(ChatColor.RED)
+            .append("You're not a player!")
+            .create();
+
+    public static final BaseComponent[] UNBIND
+            = new ComponentBuilder()
+            .color(ChatColor.GREEN)
+            .append("Compass unbound!")
+            .create();
+
+    public static BaseComponent[] playerNotFound(String name) {
+        return new ComponentBuilder()
+                .color(ChatColor.RED)
+                .append("Could not find the player ")
+                .append(name)
+                .bold(true)
+                .append("!")
+                .bold(false)
+                .create();
+    }
+
+    public static BaseComponent[] binding(Player target) {
         return new ComponentBuilder()
                 .color(ChatColor.GREEN)
                 .append("Compass bound to track ")
@@ -35,7 +68,7 @@ public final class Texts {
                 .create();
     }
 
-    public static BaseComponent[] getTrackingText(Player target) {
+    public static BaseComponent[] tracking(Player target) {
         return new ComponentBuilder()
                 .color(ChatColor.GREEN)
                 .append("Targeting ")
@@ -45,4 +78,18 @@ public final class Texts {
                 .bold(false)
                 .create();
     }
+
+    public static BaseComponent[] trackingItemTitle(ChatColor color, OfflinePlayer target) {
+        return new ComponentBuilder()
+                .append(new TranslatableComponent("item.minecraft.compass"))
+                .append(" ")
+                .color(color)
+                .append("[TRACKING ")
+                .append(target.getName())
+                .bold(true)
+                .append("]")
+                .bold(false)
+                .create();
+    }
+
 }

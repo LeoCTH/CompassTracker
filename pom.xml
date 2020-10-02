@@ -11,7 +11,7 @@
 
     <name>CompassTracker</name>
 
-    <description>Tracks players with compasses!</description>
+    <description>Track players with compasses!</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

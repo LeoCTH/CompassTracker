@@ -8,14 +8,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 
 public class BindCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("§cYou're not a player!");
+            sender.spigot().sendMessage(Texts.NOT_A_PLAYER);
             return true;
         }
         Player player = (Player) sender;
@@ -25,9 +23,9 @@ public class BindCommand implements CommandExecutor {
             if (meta != null) {
                 switch (args.length) {
                     case 0:
-                        return this.debind(stack, meta, player);
+                        return unbind(stack, meta, player);
                     case 1:
-                        return this.bind(stack, meta, player, args[0]);
+                        return bind(stack, meta, player, args[0]);
                     default:
                         return false;
                 }
@@ -39,26 +37,20 @@ public class BindCommand implements CommandExecutor {
         return true;
     }
 
-    private boolean debind(ItemStack stack, ItemMeta meta, Player player) {
-        PersistentDataContainer pdc = meta.getPersistentDataContainer();
-        pdc.remove(CompassTracker.COMPASS_TARGET);
-        player.sendMessage("§aCompass unbound!");
-        meta.setDisplayName(null);
-        MetaUtils.resetCompassTarget(meta, player);
+    private static boolean unbind(ItemStack stack, ItemMeta meta, Player player) {
+        player.spigot().sendMessage(Texts.UNBIND);
+        MetaUtils.unbind(meta, player);
         stack.setItemMeta(meta);
         return true;
     }
 
-    private boolean bind(ItemStack stack, ItemMeta meta, Player player, String targetName) {
-        PersistentDataContainer pdc = meta.getPersistentDataContainer();
+    private static boolean bind(ItemStack stack, ItemMeta meta, Player player, String targetName) {
         Player target = Bukkit.getPlayer(targetName);
         if (target == null) {
-            player.sendMessage("§cCould not find the player: " + targetName + "!");
+            player.spigot().sendMessage(Texts.playerNotFound(targetName));
             return true;
         }
-        pdc.set(CompassTracker.COMPASS_TARGET, PersistentDataType.INTEGER_ARRAY, SerializationUtils.uuid2IntArray(target.getUniqueId()));
-        player.spigot().sendMessage(Texts.getBindingText(target));
-        MetaUtils.setLocated(meta, player);
+        MetaUtils.bind(meta, player, target);
         stack.setItemMeta(meta);
         return true;
     }

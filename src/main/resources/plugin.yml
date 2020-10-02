@@ -4,9 +4,13 @@ main: com.leocth.compasstracker.CompassTracker
 api-version: 1.16
 prefix: CompassTracker
 authors: [leocth]
-description: Tracks players with compasses!
+description: Track players with compasses!
 commands:
   cbind:
-    description: Binds a compass to point at a player
-    usage: /cbind [player]
-    permission: compasstracker.bind
+    description: Binds a compass to point at the specified player.
+    usage: /cbind <player>
+    permission: compasstracker.cbind
+  cgive:
+    description: Gives you a tracking compass that is pointing at the specified player.
+    usage: /cgive <player>
+    permission: compasstracker.cgive
