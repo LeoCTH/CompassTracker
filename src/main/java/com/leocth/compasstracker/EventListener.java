@@ -29,9 +29,7 @@ public class EventListener implements Listener {
             OfflinePlayer ofp = SerializationUtils.getOfflinePlayer(arr);
 
             if (ofp == null) {
-                user.spigot().sendMessage(ChatMessageType.ACTION_BAR, Texts.PLAYER_NOT_FOUND);
-                MetaUtils.clearTitle(meta);
-                MetaUtils.resetCompassTarget(meta, user);
+                return;
             }
             else if (ofp.getPlayer() == null) {
                 user.spigot().sendMessage(ChatMessageType.ACTION_BAR, Texts.TRACE_OFFLINE);
